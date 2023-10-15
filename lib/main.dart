@@ -32,6 +32,7 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   var _value = 10.0;
+  var _dropDownValue;
 
   @override
   Widget build(BuildContext context) {
@@ -48,7 +49,7 @@ class _MyHomePageState extends State<MyHomePage> {
                 style: TextStyle(color: Colors.black, fontSize: _value),
               )),
           SizedBox(
-            height: 50,
+            height: 20,
           ),
           Slider(
             value: _value,
@@ -85,7 +86,8 @@ class _MyHomePageState extends State<MyHomePage> {
                             label: "Ok",
                             textColor: Colors.white,
                             onPressed: () {
-                              ScaffoldMessenger.of(context).hideCurrentSnackBar();
+                              ScaffoldMessenger.of(context)
+                                  .hideCurrentSnackBar();
                             },
                           ),
                           duration: Duration(milliseconds: 2000),
@@ -98,7 +100,38 @@ class _MyHomePageState extends State<MyHomePage> {
                   )
                 ]),
           ),
-
+          Container(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: [
+                SizedBox(height: 20,),
+                Text(_dropDownValue, style: TextStyle(fontSize: 20)),
+                DropdownButton(
+                  items: [
+                    DropdownMenuItem(child: Text("One", style: TextStyle(color: Colors.white)), value: "One"),
+                    DropdownMenuItem(child: Text("Two", style: TextStyle(color: Colors.white)), value: "Two",)
+                  ],
+                  iconSize: 40,
+                  dropdownColor: Colors.green,
+                  icon: Icon(Icons.arrow_drop_down),
+                  elevation: 0,
+                  underline: Container(
+                    height: 1.0,
+                    decoration: const BoxDecoration(
+                        border: Border(bottom: BorderSide(color: Colors.transparent, width: 0.0))
+                    ),
+                  ),
+                  hint: Text("Select One"),
+                  padding: EdgeInsets.all(30),
+                  onChanged: (value) {
+                    setState(() {
+                      _dropDownValue = value;
+                    });
+                  },
+                )
+              ],
+            ),
+          )
         ],
       ),
     );
