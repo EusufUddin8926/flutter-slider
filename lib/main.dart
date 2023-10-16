@@ -33,6 +33,7 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
   var _value = 10.0;
   var _dropDownValue;
+  var _isChecked = false;
 
   @override
   Widget build(BuildContext context) {
@@ -103,12 +104,12 @@ class _MyHomePageState extends State<MyHomePage> {
           SizedBox(
             height: 20,
           ),
-          Text(_dropDownValue==null ? "No Value": _dropDownValue, style: TextStyle(fontSize: 20)),
+          Text(_dropDownValue == null ? "No Value" : _dropDownValue,
+              style: TextStyle(fontSize: 20)),
           DropdownButton(
             items: [
               DropdownMenuItem(
-                  child:
-                      Text("One", style: TextStyle(color: Colors.black)),
+                  child: Text("One", style: TextStyle(color: Colors.black)),
                   value: "One"),
               DropdownMenuItem(
                 child: Text("Two", style: TextStyle(color: Colors.black)),
@@ -123,8 +124,8 @@ class _MyHomePageState extends State<MyHomePage> {
               height: 1.0,
               decoration: const BoxDecoration(
                   border: Border(
-                      bottom: BorderSide(
-                          color: Colors.transparent, width: 0.0))),
+                      bottom:
+                          BorderSide(color: Colors.transparent, width: 0.0))),
             ),
             hint: Text("Select One"),
             padding: EdgeInsets.only(left: 30, right: 30, top: 10),
@@ -153,9 +154,37 @@ class _MyHomePageState extends State<MyHomePage> {
               subtitle: Text("This is sub title."),
               trailing: Icon(Icons.ac_unit),
             ),
-          )
-
-
+          ),
+          Text(
+            _isChecked == false ? "unchecked" : "Checked",
+            style: TextStyle(fontSize: 20),
+          ),
+          ListTileTheme(
+            horizontalTitleGap: 0,
+            child: CheckboxListTile(
+              title: Text("Checkbox 1"),
+              controlAffinity: ListTileControlAffinity.leading,
+              value: _isChecked,
+              onChanged: (value) {
+                setState(() {
+                  _isChecked = value!;
+                });
+              },
+            ),
+          ),
+          ListTileTheme(
+            horizontalTitleGap: 0,
+            child: CheckboxListTile(
+              title: Text("Checkbox 2"),
+              controlAffinity: ListTileControlAffinity.leading,
+              value: _isChecked,
+              onChanged: (value) {
+                setState(() {
+                  _isChecked = value!;
+                });
+              },
+            ),
+          ),
         ],
       ),
     );
