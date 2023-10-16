@@ -34,6 +34,20 @@ class _MyHomePageState extends State<MyHomePage> {
   var _value = 10.0;
   var _dropDownValue;
   var _isChecked = false;
+  var _isValue = false;
+  List<String> checkboxValueslist = [
+    "Checkbox 1",
+    "Checkbox 2",
+    "Checkbox 3",
+    "Checkbox 4",
+    "Checkbox 5"
+  ];
+
+  void getValueFromCheckboxes() {
+    for (int i = 0; i < checkboxValueslist.length; i++) {
+      print('value: $checkboxValueslist[i]');
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -185,6 +199,24 @@ class _MyHomePageState extends State<MyHomePage> {
               },
             ),
           ),
+          Expanded(
+            child: ListView.builder(
+              itemCount: checkboxValueslist.length,
+              itemBuilder: (BuildContext context, int index) {
+                return CheckboxListTile(
+                    controlAffinity: ListTileControlAffinity.leading,
+                    title: Text(checkboxValueslist[index]),
+                    value: false,
+                    onChanged: (value) {
+                      setState(() {
+                        setState(() {
+                          _isValue = value!;
+                        });
+                      });
+                    });
+              },
+            ),
+          )
         ],
       ),
     );
