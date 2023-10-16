@@ -42,11 +42,17 @@ class _MyHomePageState extends State<MyHomePage> {
     "Checkbox 4",
     "Checkbox 5"
   ];
+  var selectedIndexes = [];
 
   void getValueFromCheckboxes() {
-    for (int i = 0; i < checkboxValueslist.length; i++) {
-      print('value: $checkboxValueslist[i]');
+    if(!selectedIndexes.isEmpty){
+      for (int i = 0; i < selectedIndexes.length; i++) {
+        print('value: ${checkboxValueslist[selectedIndexes[i]]}');
+        }
+    }else{
+      print("No value");
     }
+
   }
 
   @override
@@ -206,17 +212,31 @@ class _MyHomePageState extends State<MyHomePage> {
                 return CheckboxListTile(
                     controlAffinity: ListTileControlAffinity.leading,
                     title: Text(checkboxValueslist[index]),
-                    value: false,
-                    onChanged: (value) {
+                    value: selectedIndexes.contains(index),
+                    onChanged: (_) {
                       setState(() {
                         setState(() {
-                          _isValue = value!;
+                          if (selectedIndexes.contains(index)) {
+                            selectedIndexes.remove(index);   // unselect
+                          } else {
+                            selectedIndexes.add(index);  // select
+                          }
+                          print(selectedIndexes);
                         });
                       });
                     });
               },
             ),
-          )
+          ),
+          SizedBox(
+            height: 10,
+          ),
+          ElevatedButton(onPressed: (){
+            getValueFromCheckboxes();
+          }, child: Text("Get Value")),
+          SizedBox(
+            height: 10,
+          ),
         ],
       ),
     );
