@@ -100,38 +100,62 @@ class _MyHomePageState extends State<MyHomePage> {
                   )
                 ]),
           ),
-          Container(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.start,
-              children: [
-                SizedBox(height: 20,),
-                Text(_dropDownValue, style: TextStyle(fontSize: 20)),
-                DropdownButton(
-                  items: [
-                    DropdownMenuItem(child: Text("One", style: TextStyle(color: Colors.white)), value: "One"),
-                    DropdownMenuItem(child: Text("Two", style: TextStyle(color: Colors.white)), value: "Two",)
-                  ],
-                  iconSize: 40,
-                  dropdownColor: Colors.green,
-                  icon: Icon(Icons.arrow_drop_down),
-                  elevation: 0,
-                  underline: Container(
-                    height: 1.0,
-                    decoration: const BoxDecoration(
-                        border: Border(bottom: BorderSide(color: Colors.transparent, width: 0.0))
-                    ),
-                  ),
-                  hint: Text("Select One"),
-                  padding: EdgeInsets.all(30),
-                  onChanged: (value) {
-                    setState(() {
-                      _dropDownValue = value;
-                    });
-                  },
-                )
-              ],
+          SizedBox(
+            height: 20,
+          ),
+          Text(_dropDownValue==null ? "No Value": _dropDownValue, style: TextStyle(fontSize: 20)),
+          DropdownButton(
+            items: [
+              DropdownMenuItem(
+                  child:
+                      Text("One", style: TextStyle(color: Colors.black)),
+                  value: "One"),
+              DropdownMenuItem(
+                child: Text("Two", style: TextStyle(color: Colors.black)),
+                value: "Two",
+              )
+            ],
+            iconSize: 40,
+            dropdownColor: Colors.grey,
+            icon: Icon(Icons.arrow_drop_down),
+            elevation: 0,
+            underline: Container(
+              height: 1.0,
+              decoration: const BoxDecoration(
+                  border: Border(
+                      bottom: BorderSide(
+                          color: Colors.transparent, width: 0.0))),
+            ),
+            hint: Text("Select One"),
+            padding: EdgeInsets.only(left: 30, right: 30, top: 10),
+            onChanged: (value) {
+              setState(() {
+                _dropDownValue = value;
+              });
+            },
+          ),
+          SizedBox(
+            height: 10,
+          ),
+          Dismissible(
+            key: ValueKey("abc"),
+            secondaryBackground: Container(
+              color: Colors.red,
+              child: Icon(Icons.delete, size: 40, color: Colors.black),
+            ),
+            background: Container(
+              color: Colors.blue,
+              child: Icon(Icons.delete, size: 40, color: Colors.white),
+            ),
+            child: ListTile(
+              contentPadding: EdgeInsets.only(left: 30, right: 30),
+              title: Text("This is title"),
+              subtitle: Text("This is sub title."),
+              trailing: Icon(Icons.ac_unit),
             ),
           )
+
+
         ],
       ),
     );
